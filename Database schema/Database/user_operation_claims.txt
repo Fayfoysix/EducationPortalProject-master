@@ -1,0 +1,36 @@
+USE [EducationPortalDb]
+GO
+
+/****** Object:  Table [dbo].[UserOperationClaims]    Script Date: 20.03.2022 23:29:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserOperationClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[OperationClaimId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[IsApproved] [bit] NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[UserOperationClaims] ADD  CONSTRAINT [DF_UserOperationClaims_IsApproved]  DEFAULT ((0)) FOR [IsApproved]
+GO
+
+ALTER TABLE [dbo].[UserOperationClaims]  WITH CHECK ADD  CONSTRAINT [FK_UserOperationClaims_OperationClaims] FOREIGN KEY([OperationClaimId])
+REFERENCES [dbo].[OperationClaims] ([Id])
+GO
+
+ALTER TABLE [dbo].[UserOperationClaims] CHECK CONSTRAINT [FK_UserOperationClaims_OperationClaims]
+GO
+
+ALTER TABLE [dbo].[UserOperationClaims]  WITH CHECK ADD  CONSTRAINT [FK_UserOperationClaims_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+
+ALTER TABLE [dbo].[UserOperationClaims] CHECK CONSTRAINT [FK_UserOperationClaims_Users]
+GO
+
+

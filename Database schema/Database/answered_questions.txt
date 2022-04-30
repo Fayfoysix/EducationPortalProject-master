@@ -1,0 +1,44 @@
+USE [EducationPortalDb]
+GO
+
+/****** Object:  Table [dbo].[AnsweredQuestions]    Script Date: 20.03.2022 23:31:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AnsweredQuestions](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[QuestionId] [int] NOT NULL,
+	[AnswerId] [int] NOT NULL,
+ CONSTRAINT [PK_AnsweredQuestions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions]  WITH CHECK ADD  CONSTRAINT [FK_AnsweredQuestions_Answers] FOREIGN KEY([AnswerId])
+REFERENCES [dbo].[Answers] ([Id])
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions] CHECK CONSTRAINT [FK_AnsweredQuestions_Answers]
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions]  WITH CHECK ADD  CONSTRAINT [FK_AnsweredQuestions_Questions] FOREIGN KEY([QuestionId])
+REFERENCES [dbo].[Questions] ([Id])
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions] CHECK CONSTRAINT [FK_AnsweredQuestions_Questions]
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions]  WITH CHECK ADD  CONSTRAINT [FK_AnsweredQuestions_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+
+ALTER TABLE [dbo].[AnsweredQuestions] CHECK CONSTRAINT [FK_AnsweredQuestions_Users]
+GO
+
+

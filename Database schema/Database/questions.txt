@@ -1,0 +1,32 @@
+USE [EducationPortalDb]
+GO
+
+/****** Object:  Table [dbo].[Questions]    Script Date: 20.03.2022 23:30:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Questions](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](500) NULL,
+	[IsApproved] [bit] NOT NULL,
+ CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Questions] ADD  CONSTRAINT [DF_Questions_Title]  DEFAULT (N'Title') FOR [Title]
+GO
+
+ALTER TABLE [dbo].[Questions] ADD  CONSTRAINT [DF_Questions_Description]  DEFAULT (N'Description') FOR [Description]
+GO
+
+ALTER TABLE [dbo].[Questions] ADD  CONSTRAINT [DF_Questions_IsApproved]  DEFAULT ((1)) FOR [IsApproved]
+GO
+
+
